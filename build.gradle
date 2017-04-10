@@ -1,0 +1,97 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'java-library-distribution'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'jacoco'
+
+
+jar {
+    baseName = 'bacnet-it-stack'
+}
+
+repositories {
+    mavenCentral()
+}
+
+distributions {
+    main{
+        baseName = 'bacnet-it-stack'
+    }
+}
+
+
+dependencies {
+    compile 'org.mockito:mockito-core:1.10.19'
+    compile 'io.netty:netty-all:4.1.2.Final'
+    compile 'com.google.guava:guava:18.0'
+    compile 'org.apache.commons:commons-collections4:4.0'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'dnsjava:dnsjava:2.1.7'
+    compile 'commons-configuration:commons-configuration:1.10'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.0.2'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.4'
+    testCompile 'ch.qos.logback:logback-classic:1.1.2'
+    testCompile 'junit:junit:4.12'
+}
+
+
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy-MM-dd--HH-mm')
+    return formattedDate
+}
+
+build.dependsOn jacocoTestReport
+
+test {
+	ignoreFailures = true
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
+}
+
+checkstyle {
+    toolVersion = '7.5.1'
+}
+
+findbugs {
+    ignoreFailures = 'true'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        csv.enabled = false
+        html.enabled = true
+    }
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.3'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
+
+
