@@ -105,10 +105,11 @@ abstract public class Serializer implements Serializable {
         return contextId;
     }
 
-    protected static void popStart(final _ByteQueue queue,
-            final int contextId) throws Exception {
+    protected static void popStart(final _ByteQueue queue, final int contextId)
+            throws Exception {
         if (popStart(queue) != contextId) {
-            throw new Exception("ErrorClass.property,ErrorCode.missingRequiredParameter");
+            throw new Exception(
+                    "ErrorClass.property,ErrorCode.missingRequiredParameter");
             // throw new BACnetErrorException(ErrorClass.property,
             // ErrorCode.missingRequiredParameter);
         }
@@ -182,7 +183,7 @@ abstract public class Serializer implements Serializable {
         } catch (final Exception e) {
             throw new Exception(e);
         }
-       
+
     }
 
     //
@@ -232,8 +233,6 @@ abstract public class Serializer implements Serializable {
         return read(queue, clazz, contextId);
     }
 
-   
-
     // Read and write encodable
     protected static void writeEncodable(final _ByteQueue queue,
             final Serializer type, final int contextId) {
@@ -243,7 +242,6 @@ abstract public class Serializer implements Serializable {
             type.write(queue, contextId);
         }
     }
-    
 
     private static <T extends Serializer> T readWrapped(final _ByteQueue queue,
             final Class<T> clazz, final int contextId) throws Exception {

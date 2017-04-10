@@ -30,7 +30,8 @@ public class EntityRecord extends ITBBase {
 
     // Constructor
     public EntityRecord(final BACnetEID identifier,
-            final NetworkAddress networkaddress, final UnsignedInteger16 priority,
+            final NetworkAddress networkaddress,
+            final UnsignedInteger16 priority,
             final UnsignedInteger31 timeToLive,
             final DirectoryRecordQuality quality) {
         this.identifier = identifier;

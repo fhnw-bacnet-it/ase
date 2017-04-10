@@ -17,8 +17,6 @@ package ch.fhnw.bacnetit.stack.encoding;
 
 import java.io.UnsupportedEncodingException;
 
-
-
 public class _CharacterString extends PrimitiveSerializer {
     private static final long serialVersionUID = -3146333907363025078L;
 
@@ -47,17 +45,18 @@ public class _CharacterString extends PrimitiveSerializer {
         this.value = value;
     }
 
-    public _CharacterString(final byte encoding, final String value) throws Exception {
+    public _CharacterString(final byte encoding, final String value)
+            throws Exception {
         try {
             validateEncoding();
-        } catch(Exception e){
+        } catch (final Exception e) {
             throw new Exception(e);
         }
-//        catch (final BACnetErrorException e) {
-//            // This is an API constructor, so it doesn't need to throw checked
-//            // exceptions. Convert to runtime.
-//            throw new BACnetRuntimeException(e);
-//        }
+        // catch (final BACnetErrorException e) {
+        // // This is an API constructor, so it doesn't need to throw checked
+        // // exceptions. Convert to runtime.
+        // throw new BACnetRuntimeException(e);
+        // }
         this.encoding = encoding;
         this.value = value;
     }
@@ -139,7 +138,8 @@ public class _CharacterString extends PrimitiveSerializer {
         if (encoding != Encodings.ANSI_X3_4
                 && encoding != Encodings.ISO_10646_UCS_2
                 && encoding != Encodings.ISO_8859_1) {
-            throw new Exception("ErrorClass.property ErrorCode.characterSetNotSupported Byte.toString(encoding)");
+            throw new Exception(
+                    "ErrorClass.property ErrorCode.characterSetNotSupported Byte.toString(encoding)");
         }
     }
 

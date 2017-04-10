@@ -20,8 +20,8 @@ import java.net.InetSocketAddress;
 public class _Address extends ITBBase {
     public static final int LOCAL_NETWORK = 0;
 
-    public static final _Address GLOBAL = new _Address(new UnsignedInteger16(0xFFFF),
-            null);
+    public static final _Address GLOBAL = new _Address(
+            new UnsignedInteger16(0xFFFF), null);
 
     private static final long serialVersionUID = -3376358193474831753L;
 
@@ -30,11 +30,13 @@ public class _Address extends ITBBase {
     private final _OctetString macAddress;
 
     public _Address(final int networkNumber, final byte[] macAddress) {
-        this(new UnsignedInteger16(networkNumber), new _OctetString(macAddress));
+        this(new UnsignedInteger16(networkNumber),
+                new _OctetString(macAddress));
     }
 
     public _Address(final int networkNumber, final String dottedString) {
-        this(new UnsignedInteger16(networkNumber), new _OctetString(dottedString));
+        this(new UnsignedInteger16(networkNumber),
+                new _OctetString(dottedString));
     }
 
     public _Address(final _OctetString macAddress) {

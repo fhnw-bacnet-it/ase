@@ -1,8 +1,6 @@
 
 package ch.fhnw.bacnetit.stack.encoding;
 
-
-
 public class UnsignedInteger31 extends PrimitiveSerializer {
     private static final long serialVersionUID = -3350034351888356100L;
 
@@ -10,34 +8,29 @@ public class UnsignedInteger31 extends PrimitiveSerializer {
 
     private int value;
 
-
     public UnsignedInteger31(final int _value) {
         if (value < 0) {
             throw new IllegalArgumentException(
                     "Value cannot be less than zero");
         }
-        if (value > 0x7FFFFFFF){ // max signed int: 2147483647
+        if (value > 0x7FFFFFFF) { // max signed int: 2147483647
             throw new IllegalArgumentException(
                     "Value cannot be more than zero");
         }
         value = _value;
     }
 
-
-
     public int intValue() {
 
-            return value;
+        return value;
 
     }
 
     public long longValue() {
 
-            return value;
+        return value;
 
     }
-
-
 
     //
     // Reading and writing
@@ -48,39 +41,39 @@ public class UnsignedInteger31 extends PrimitiveSerializer {
             while (length > 0) {
                 value |= (queue.pop() & 0xff) << (--length * 8);
             }
-     } 
-//        else {
-//            final byte[] bytes = new byte[length + 1];
-//            queue.pop(bytes, 1, length);
-//            bigValue = new BigInteger(bytes);
-//        }
+        }
+        // else {
+        // final byte[] bytes = new byte[length + 1];
+        // queue.pop(bytes, 1, length);
+        // bigValue = new BigInteger(bytes);
+        // }
     }
 
     @Override
     public void writeImpl(final _ByteQueue queue) {
         int length = (int) getLength();
 
-            while (length > 0) {
-                queue.push(value >> (--length * 8));
-            }
+        while (length > 0) {
+            queue.push(value >> (--length * 8));
+        }
 
     }
 
     @Override
     public long getLength() {
-//        if (bigValue == null) {
-            int length;
-            if (value < 0x100) {
-                length = 1;
-            } else if (value < 0x10000) {
-                length = 2;
-            } else if (value < 0x1000000) {
-                length = 3;
-            } else {
-                length = 4;
-            }
+        // if (bigValue == null) {
+        int length;
+        if (value < 0x100) {
+            length = 1;
+        } else if (value < 0x10000) {
+            length = 2;
+        } else if (value < 0x1000000) {
+            length = 3;
+        } else {
+            length = 4;
+        }
 
-            return length;
+        return length;
 
     }
 
@@ -110,13 +103,13 @@ public class UnsignedInteger31 extends PrimitiveSerializer {
             return false;
         }
         final UnsignedInteger31 other = (UnsignedInteger31) obj;
-        return ((UnsignedInteger31)other).intValue() == this.intValue();
+        return other.intValue() == this.intValue();
     }
 
     @Override
     public String toString() {
 
-            return Integer.toString(value);
+        return Integer.toString(value);
 
     }
 }

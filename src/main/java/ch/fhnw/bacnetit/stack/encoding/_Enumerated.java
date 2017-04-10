@@ -15,8 +15,6 @@
  *******************************************************************************/
 package ch.fhnw.bacnetit.stack.encoding;
 
-
-
 public class _Enumerated extends UnsignedInteger31 {
     private static final long serialVersionUID = 2462119559912570064L;
 
@@ -26,9 +24,9 @@ public class _Enumerated extends UnsignedInteger31 {
         super(value);
     }
 
-//    public _Enumerated(final BigInteger value) {
-//        super(value);
-//    }
+    // public _Enumerated(final BigInteger value) {
+    // super(value);
+    // }
 
     public byte byteValue() {
         return (byte) intValue();

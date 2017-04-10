@@ -19,7 +19,6 @@ import java.net.URI;
 
 import ch.fhnw.bacnetit.stack.encoding.BACnetEID;
 import ch.fhnw.bacnetit.stack.encoding.T_UnitDataIndication;
-
 import io.netty.channel.ChannelHandlerContext;
 
 /**
@@ -43,7 +42,7 @@ public abstract class ChannelListener {
         return this.eid;
     }
 
-    //public abstract _CharacterString getURIfromNPO();
+    // public abstract _CharacterString getURIfromNPO();
     public abstract URI getURIfromNPO();
 
     public abstract void onIndication(T_UnitDataIndication tUnitDataIndication,

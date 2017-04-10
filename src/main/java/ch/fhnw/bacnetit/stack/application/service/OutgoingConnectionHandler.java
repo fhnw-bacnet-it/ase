@@ -20,7 +20,9 @@ import java.net.URI;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 import com.google.common.base.Preconditions;
+
 import ch.fhnw.bacnetit.stack.encoding.TransportError;
 import ch.fhnw.bacnetit.stack.encoding.exception.StackCommunicationException;
 import ch.fhnw.bacnetit.stack.network.transport.ConnectionClient;

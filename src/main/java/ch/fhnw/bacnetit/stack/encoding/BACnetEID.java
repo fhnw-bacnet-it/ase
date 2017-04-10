@@ -135,9 +135,9 @@ public class BACnetEID extends Serializer implements Comparable<BACnetEID> {
 
     @Override
     public String toString() {
-        char[] hexArray = "0123456789ABCDEF".toCharArray();
-        byte[] bytes = bytes();
-        char[] hexChars = new char[bytes.length * 3];
+        final char[] hexArray = "0123456789ABCDEF".toCharArray();
+        final byte[] bytes = bytes();
+        final char[] hexChars = new char[bytes.length * 3];
         for (int j = 0; j < bytes.length; j++) {
             final int v = bytes[j] & 0xFF;
             hexChars[j * 3] = hexArray[v >>> 4];

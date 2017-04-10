@@ -21,9 +21,9 @@ import ch.fhnw.bacnetit.stack.application.configuration.KeystoreConfig;
  */
 public class NetworkPortObj {
 
-    //private _CharacterString uri;
+    // private _CharacterString uri;
     private URI uri;
-    private KeystoreConfig keystoreConfig;
+    private final KeystoreConfig keystoreConfig;
 
     public NetworkPortObj(final String protocol, final int port,
             final KeystoreConfig keystoreConfig) {
@@ -35,8 +35,8 @@ public class NetworkPortObj {
         }
     }
 
-   //public _CharacterString getUri() {
-    public URI getUri(){
+    // public _CharacterString getUri() {
+    public URI getUri() {
         return this.uri;
     }
 
@@ -79,18 +79,18 @@ public class NetworkPortObj {
                 throw new Exception("FQDN from Keystore could not be read");
             }
 
-//            this.uri = new _CharacterString(protocol + "://"
-//                    + ((String) x509
-//                            .getCertificateChain(keystoreConfig.alias)[0]
-//                                    .getSubjectAlternativeNames().iterator()
-//                                    .next().get(1))
-//                    + ":" + port);
-          this.uri = new URI(protocol + "://"
-          + ((String) x509
-                  .getCertificateChain(keystoreConfig.alias)[0]
-                          .getSubjectAlternativeNames().iterator()
-                          .next().get(1))
-          + ":" + port);
+            // this.uri = new _CharacterString(protocol + "://"
+            // + ((String) x509
+            // .getCertificateChain(keystoreConfig.alias)[0]
+            // .getSubjectAlternativeNames().iterator()
+            // .next().get(1))
+            // + ":" + port);
+            this.uri = new URI(protocol + "://"
+                    + ((String) x509
+                            .getCertificateChain(keystoreConfig.alias)[0]
+                                    .getSubjectAlternativeNames().iterator()
+                                    .next().get(1))
+                    + ":" + port);
 
         } catch (final Exception io) {
             System.err.println(io);
