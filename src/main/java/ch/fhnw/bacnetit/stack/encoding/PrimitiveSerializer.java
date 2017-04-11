@@ -1,4 +1,3 @@
-
 package ch.fhnw.bacnetit.stack.encoding;
 
 abstract public class PrimitiveSerializer extends Serializer {

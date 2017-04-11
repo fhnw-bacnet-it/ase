@@ -1,4 +1,3 @@
-
 package ch.fhnw.bacnetit.stack.encoding;
 
 public class UnsignedInteger31 extends PrimitiveSerializer {

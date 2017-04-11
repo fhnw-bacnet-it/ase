@@ -52,11 +52,12 @@
 		<property name="message" value="Line has trailing spaces." />
 	</module>
 
-	<!-- Checks for Headers -->
+	<!-- Checks for Headers
 	<module name="Header">
 		<property name="header"
-			value="// Copyright (C) 2017 FHNW\n// All rights reserved" />
+			value="" />
 	</module>
+	-->
 
 	<module name="TreeWalker">
 

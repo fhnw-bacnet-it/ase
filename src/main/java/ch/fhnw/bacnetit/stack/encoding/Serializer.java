@@ -1,4 +1,3 @@
-
 package ch.fhnw.bacnetit.stack.encoding;
 
 import java.io.Serializable;
