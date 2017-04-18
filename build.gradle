@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'java-library-distribution'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
@@ -14,11 +13,7 @@ repositories {
     mavenCentral()
 }
 
-distributions {
-    main{
-        baseName = 'bacnet-it-stack'
-    }
-}
+
 
 
 dependencies {
