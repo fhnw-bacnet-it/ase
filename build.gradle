@@ -5,8 +5,14 @@ apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 
 
+version = '0.1.0-SNAPSHOT'
+
 jar {
     baseName = 'bacnet-it-stack'
+    manifest {
+        attributes("Implementation-Title": "BACnet/IT Stack",
+                   "Implementation-Version": version)
+    }
 }
 
 repositories {
@@ -40,7 +46,7 @@ def getDate() {
 build.dependsOn jacocoTestReport
 
 test {
-	ignoreFailures = true
+    ignoreFailures = true
     reports {
         junitXml.enabled = true
         html.enabled = true
