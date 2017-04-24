@@ -54,7 +54,17 @@ public class DirectoryService {
         }
         return instance;
     }
-
+    
+    public synchronized void setDNSBinding(DirectoryBinding dnsBinding){
+        if (dnsBinding != null){
+            return;
+        }
+        this.dnsBinding = dnsBinding;
+        LOG.debug("DNS", dnsBinding.toString());
+        
+    }
+    
+    /*
     public synchronized void setDns(final DiscoveryConfig dsConfig)
             throws UnknownHostException {
         dnsBinding = DirectoryBindingFactory.createDirectoryBinding(
@@ -62,7 +72,7 @@ public class DirectoryService {
                 dsConfig.dnsIp, dsConfig);
 
         LOG.debug("DNS " + dsConfig.dnsIp + " set");
-    }
+    }*/
 
     private synchronized ConcurrentHashMap<BACnetEID, URI> readCacheFile() {
         final ConcurrentHashMap<BACnetEID, URI> readCache = new ConcurrentHashMap<>();

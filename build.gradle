@@ -8,9 +8,9 @@ apply plugin: 'jacoco'
 version = '0.1.0-SNAPSHOT'
 
 jar {
-    baseName = 'bacnet-it-stack'
+    baseName = 'bacnet-it-applicationserviceelement'
     manifest {
-        attributes("Implementation-Title": "BACnet/IT Stack",
+        attributes("Implementation-Title": "BACnet/IT Application Service Element",
                    "Implementation-Version": version)
     }
 }
