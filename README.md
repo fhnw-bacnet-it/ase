@@ -1,6 +1,6 @@
 # Application Service Element
 
-__[Hands On 1](#hands-on-1)__ demonstrates how to to setup two BACnet/IT Stacks on localhost with each two BACnet devices. A device from stack 1 sends a ReadPropertyRequest to a device from stack 2. BACnet4J (https://github.com/empeeoh/BACnet4J) is used to get the byte array of the ReadPropertyRequest. The destinations address is already resolved (localhost), nevertheless the usage of a directory binding is shown.
+__[Hands On 1](#hands-on-1)__ demonstrates how to to setup two BACnet/IT Stacks on localhost with each two BACnet devices. A device from stack 1 sends a ReadPropertyRequest to a device from stack 2. [BACnet4J](https://github.com/empeeoh/BACnet4J) is used to get the byte array of the ReadPropertyRequest. The destinations address is already resolved (localhost), nevertheless the usage of a directory binding is shown.
 
 __[Hands On 2](#hands-on-2)__ demonstrates how to setup one BACnet/IT Stack on localhost with two BACnet devices. One BACnet device sends a WhoIsRequest to the other device. The WhoIsRequest is represented as a byte array, therefore no dependencies to other projects like BACnet4J (to represent BACnet service) is needed. The destinations address is already resolved (localhost), nevertheless the usage of a directory binding is shown.
 
@@ -9,9 +9,9 @@ __[Hands On 3](#hands-on-3)__ demonstrates how to run a BACnet/IT Stack with mor
 
 
 
-#Hands on 1
+# Hands on 1
 
-##Download
+## Download
 1. Create a new empty directory __BACnetIT__ and make it the current directory
 2. Download the source code of projects __ApplicationServiceElement__, __TransportWSBinding__, __DirectoryDNSSDBinding__ and __Misc__ 
 __ApplicationServiceElement__ project:  
@@ -481,14 +481,14 @@ device2inStack2 should get an indication from device1inStack1.
 ```
 
 
-#Hands on 2
+# Hands on 2
 
-##Purpose
+## Purpose
 Hands on 2 demonstrates how to setup one BACnet/IT Stack on localhost with two BACnet devices. One BACnet device sends a WhoIsRequest to the other device. The WhoIsRequest is represented as a byte array, therefore no dependencies to other projects like BACnet4J (to represent BACnet service) is needed. The destinations address is already resolved (localhost), nevertheless the usage of a directory binding is shown.
 
 
 
-##Download
+## Download
 1. Create a new empty directory __BACnetIT__ and make it the current directory
 2. Download the source code of projects __ApplicationServiceElement__, __TransportWSBinding__ and __DirectoryDNSSDBinding__.  
 __ApplicationServiceElement__ project:  
@@ -499,7 +499,7 @@ __DirectoryDNSSDBinding__ project:
 ```git clone https://github.com/fhnw-BACnet-IT/DirectoryDNSSDBinding.git```  
 
 
-##Build
+## Build
 1. Make __BACnetIT/TransportWSBinding__ the current directory.
 2. Note that project __TransportWSBinding__ has a dependency to project __ApplicationServiceElement__, so ensure that both projects are stored at the same level in the __BACnetIT__ folder.
 3. Build __TransportWSBinding__ using Gradle Wrapper:  
@@ -634,7 +634,7 @@ Ensure the builded jars are in java class path.
 ```
 
 
-#Hands on 3
+# Hands on 3
 ### Description / Story: 
 Add two transport bindings; websocket and websocket secure.
 
@@ -661,9 +661,9 @@ connectionFactory.addConnectionClient("ws", new WSConnectionClientFactory());
 connectionFactory.addConnectionServer("ws", new WSConnectionServerFactory([PORT]));
 ```
 
-#Hands on 4
+# Hands on 4
 ### Description / Story: 
-Send a message between two simulated BACnet/IT devices using the Directory Service.
+Send a message between two simulated BACnet/IT devices using prior BACnet/IT EID resolution.
 
 [follows]
         
