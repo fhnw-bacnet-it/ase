@@ -53,25 +53,25 @@ public class DirectoryService {
         }
         return instance;
     }
-    
-    public synchronized void setDNSBinding(DirectoryBinding dnsBinding){
-        if (dnsBinding != null){
+
+    public synchronized void setDNSBinding(final DirectoryBinding dnsBinding) {
+        if (dnsBinding != null) {
             return;
         }
         this.dnsBinding = dnsBinding;
         LOG.debug("DNS", dnsBinding.toString());
-        
-    }
-    
-    /*
-    public synchronized void setDns(final DiscoveryConfig dsConfig)
-            throws UnknownHostException {
-        dnsBinding = DirectoryBindingFactory.createDirectoryBinding(
-                DirectoryBindingType.valueOf(dsConfig.directoryBindingType),
-                dsConfig.dnsIp, dsConfig);
 
-        LOG.debug("DNS " + dsConfig.dnsIp + " set");
-    }*/
+    }
+
+    /*
+     * public synchronized void setDns(final DiscoveryConfig dsConfig) throws
+     * UnknownHostException { dnsBinding =
+     * DirectoryBindingFactory.createDirectoryBinding(
+     * DirectoryBindingType.valueOf(dsConfig.directoryBindingType),
+     * dsConfig.dnsIp, dsConfig);
+     * 
+     * LOG.debug("DNS " + dsConfig.dnsIp + " set"); }
+     */
 
     private synchronized ConcurrentHashMap<BACnetEID, URI> readCacheFile() {
         final ConcurrentHashMap<BACnetEID, URI> readCache = new ConcurrentHashMap<>();

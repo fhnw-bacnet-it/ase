@@ -1,7 +1,5 @@
 package ch.fhnw.bacnetit.ase.application.transaction;
 
-import java.net.URI;
-
 import ch.fhnw.bacnetit.ase.encoding.BACnetEID;
 import ch.fhnw.bacnetit.ase.encoding.T_UnitDataIndication;
 import io.netty.channel.ChannelHandlerContext;
@@ -26,9 +24,6 @@ public abstract class ChannelListener {
     public BACnetEID getEID() {
         return this.eid;
     }
-
-    // public abstract _CharacterString getURIfromNPO();
-    public abstract URI getURIfromNPO();
 
     public abstract void onIndication(T_UnitDataIndication tUnitDataIndication,
             ChannelHandlerContext ctx);

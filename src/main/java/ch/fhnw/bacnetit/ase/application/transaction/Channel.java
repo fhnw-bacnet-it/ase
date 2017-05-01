@@ -31,7 +31,8 @@ import io.netty.util.internal.logging.InternalLogger;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 
 @Sharable
-public class Channel extends ChannelDuplexHandler implements EndPointHandler {
+public class Channel extends ChannelDuplexHandler
+        implements EndPointHandler, ApplicationService, ChannelConfiguration {
     private static final InternalLogger LOG = InternalLoggerFactory
             .getInstance(Channel.class);
     private OutgoingConnectionHandler outgoingConnectionHandler;
@@ -39,8 +40,9 @@ public class Channel extends ChannelDuplexHandler implements EndPointHandler {
     private final TransactionManager transactionManager = new TransactionManager();
     private final List<ChannelListener> channelListeners = new ArrayList<ChannelListener>();
     private BACnetEntityListener entityListener = null;
-    protected boolean isInitialized = false;
+    private boolean isInitialized = false;
 
+    @Override
     public void setEntityListener(final BACnetEntityListener _entityListener) {
         if (this.entityListener != null) {
             LOG.error("EntityListener is already set");
@@ -50,11 +52,12 @@ public class Channel extends ChannelDuplexHandler implements EndPointHandler {
 
     }
 
-    public List<ChannelListener> getChannelListeners() {
+    private List<ChannelListener> getChannelListeners() {
         return this.channelListeners;
     }
 
     // Register a device which use this instance as messaging
+    @Override
     public void registerChannelListener(final ChannelListener msgListener) {
         if (msgListener != null) {
             this.channelListeners.add(msgListener);
@@ -236,6 +239,7 @@ public class Channel extends ChannelDuplexHandler implements EndPointHandler {
         new ExceptionManager().manageException(cause, null, null, this);
     }
 
+    @Override
     public synchronized void doRequest(
             final T_UnitDataRequest t_unitDataRequest) {
 
@@ -250,6 +254,7 @@ public class Channel extends ChannelDuplexHandler implements EndPointHandler {
         outgoingConnectionHandler.writeAndFlush(t_unitDataRequest.getData());
     }
 
+    @Override
     public void doCancel(final BACnetEID destination, final BACnetEID source) {
         // TODO Auto-generated method stub
     }
@@ -307,10 +312,11 @@ public class Channel extends ChannelDuplexHandler implements EndPointHandler {
         return this.transactionManager;
     }
 
-    public boolean isInitialized() {
-        return isInitialized;
-    }
+    // public boolean isInitialized() {
+    // return isInitialized;
+    // }
 
+    @Override
     public void initializeAndStart(final ConnectionFactory connectionFactory) {
         // Check if at least one protocol is set
 
@@ -346,6 +352,7 @@ public class Channel extends ChannelDuplexHandler implements EndPointHandler {
         incomingConnectionHandler.waitUntilClosed();
     }
 
+    @Override
     public void shutdown() {
         incomingConnectionHandler.shutdown();
         outgoingConnectionHandler.shutdown();
