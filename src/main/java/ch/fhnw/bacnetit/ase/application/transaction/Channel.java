@@ -51,8 +51,9 @@ public class Channel extends ChannelDuplexHandler
         this.entityListener = _entityListener;
 
     }
-
-    private List<ChannelListener> getChannelListeners() {
+    
+    @Override
+    public List<ChannelListener> getChannelListeners() {
         return this.channelListeners;
     }
 
