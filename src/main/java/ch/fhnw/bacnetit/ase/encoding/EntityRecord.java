@@ -1,5 +1,7 @@
 package ch.fhnw.bacnetit.ase.encoding;
 
+import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
+
 public class EntityRecord extends ITBBase {
 
     /**

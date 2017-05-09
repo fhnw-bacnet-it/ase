@@ -1,7 +1,7 @@
-package ch.fhnw.bacnetit.ase.application.transaction;
+package ch.fhnw.bacnetit.ase.application.transaction.api;
 
-import ch.fhnw.bacnetit.ase.encoding.BACnetEID;
-import ch.fhnw.bacnetit.ase.encoding.T_UnitDataRequest;
+import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
+import ch.fhnw.bacnetit.ase.encoding.api.T_UnitDataRequest;
 
 public interface ApplicationService {
 

@@ -3,9 +3,9 @@ package ch.fhnw.bacnetit.ase.application.service;
 import java.util.LinkedList;
 import java.util.List;
 
-import ch.fhnw.bacnetit.ase.network.transport.ConnectionFactory;
 import ch.fhnw.bacnetit.ase.network.transport.ConnectionServer;
-import ch.fhnw.bacnetit.ase.network.transport.ConnectionServerPipe;
+import ch.fhnw.bacnetit.ase.network.transport.api.ConnectionFactory;
+import ch.fhnw.bacnetit.ase.network.transport.api.ConnectionServerPipe;
 import ch.fhnw.bacnetit.ase.network.transport.util.ByteBufLogger;
 import ch.fhnw.bacnetit.ase.network.transport.util.MessageLogger;
 import io.netty.bootstrap.ServerBootstrap;

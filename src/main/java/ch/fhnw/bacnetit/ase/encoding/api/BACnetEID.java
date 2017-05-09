@@ -1,4 +1,8 @@
-package ch.fhnw.bacnetit.ase.encoding;
+package ch.fhnw.bacnetit.ase.encoding.api;
+
+import ch.fhnw.bacnetit.ase.encoding.Serializer;
+import ch.fhnw.bacnetit.ase.encoding.UnsignedInteger31;
+import ch.fhnw.bacnetit.ase.encoding._ByteQueue;
 
 /**
  * Represents a BACnetEID BACnetEID options are "Not Assigned", "Device

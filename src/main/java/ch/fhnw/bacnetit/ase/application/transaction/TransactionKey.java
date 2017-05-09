@@ -1,7 +1,7 @@
 package ch.fhnw.bacnetit.ase.application.transaction;
 
-import ch.fhnw.bacnetit.ase.encoding.BACnetEID;
 import ch.fhnw.bacnetit.ase.encoding.UnsignedInteger8;
+import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
 
 public class TransactionKey {
 

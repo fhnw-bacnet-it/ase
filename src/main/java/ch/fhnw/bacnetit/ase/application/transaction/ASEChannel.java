@@ -6,21 +6,22 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import ch.fhnw.bacnetit.ase.application.BACnetEntityListener;
 import ch.fhnw.bacnetit.ase.application.ExceptionManager;
+import ch.fhnw.bacnetit.ase.application.api.BACnetEntityListener;
 import ch.fhnw.bacnetit.ase.application.service.EndPointHandler;
 import ch.fhnw.bacnetit.ase.application.service.IncomingConnectionHandler;
 import ch.fhnw.bacnetit.ase.application.service.OutgoingConnectionHandler;
-import ch.fhnw.bacnetit.ase.encoding.BACnetEID;
+import ch.fhnw.bacnetit.ase.application.transaction.api.ChannelListener;
 import ch.fhnw.bacnetit.ase.encoding.ControlMessage;
 import ch.fhnw.bacnetit.ase.encoding.ControlMessageInitEvent;
 import ch.fhnw.bacnetit.ase.encoding.ControlMessageReceivedEvent;
-import ch.fhnw.bacnetit.ase.encoding.TPDU;
-import ch.fhnw.bacnetit.ase.encoding.T_UnitDataIndication;
-import ch.fhnw.bacnetit.ase.encoding.T_UnitDataRequest;
 import ch.fhnw.bacnetit.ase.encoding.UnsignedInteger31;
+import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
+import ch.fhnw.bacnetit.ase.encoding.api.TPDU;
+import ch.fhnw.bacnetit.ase.encoding.api.T_UnitDataIndication;
+import ch.fhnw.bacnetit.ase.encoding.api.T_UnitDataRequest;
 import ch.fhnw.bacnetit.ase.network.transport.ConnectionClient;
-import ch.fhnw.bacnetit.ase.network.transport.ConnectionFactory;
+import ch.fhnw.bacnetit.ase.network.transport.api.ConnectionFactory;
 import io.netty.channel.ChannelDuplexHandler;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
@@ -31,16 +32,17 @@ import io.netty.util.internal.logging.InternalLogger;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 
 @Sharable
-public class Channel extends ChannelDuplexHandler
-        implements EndPointHandler, ApplicationService, ChannelConfiguration {
+public class ASEChannel extends ChannelDuplexHandler
+        implements EndPointHandler, ch.fhnw.bacnetit.ase.application.transaction.api.Channel{
     private static final InternalLogger LOG = InternalLoggerFactory
-            .getInstance(Channel.class);
+            .getInstance(ASEChannel.class);
     private OutgoingConnectionHandler outgoingConnectionHandler;
     private IncomingConnectionHandler incomingConnectionHandler;
     private final TransactionManager transactionManager = new TransactionManager();
     private final List<ChannelListener> channelListeners = new ArrayList<ChannelListener>();
     private BACnetEntityListener entityListener = null;
     private boolean isInitialized = false;
+
 
     @Override
     public void setEntityListener(final BACnetEntityListener _entityListener) {
@@ -85,7 +87,7 @@ public class Channel extends ChannelDuplexHandler
                             .toString().split("/");
 
                     // control message protocol is always websocket
-                    final URI remoteUri = new URI("ws://" + uri[uri.length]);
+                    final URI remoteUri = new URI("ws://" + uri[uri.length-1]);
                     if (this.entityListener == null) {
                         LOG.error("The BACnetEntityListener isn't set");
                         return;
@@ -195,18 +197,18 @@ public class Channel extends ChannelDuplexHandler
             }
         } catch (final Exception e) {
             LOG.error(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @Override
     public void channelRead(final ChannelHandlerContext ctx, final Object msg) {
         if (msg instanceof TPDU) {
-            System.out.println("Is a invoke id here no2:");
-            System.out.println(((TPDU) msg).getInvokeId());
+
             final TPDU tpdu = (TPDU) msg;
-            LOG.debug("Channel got a BACnetMessage");
+      
             // TODO, next line is stop and fail
-            LOG.debug("whole message: " + tpdu.toString());
+           
 
             this.onIndication(tpdu, ctx);
 
@@ -261,19 +263,19 @@ public class Channel extends ChannelDuplexHandler
     }
 
     private void onIndication(final TPDU msg, final ChannelHandlerContext ctx) {
-        System.out.println("Is a invoke id here?");
         System.out.println(msg.getInvokeId());
 
         T_UnitDataIndication indicationUnit = null;
         indicationUnit = new T_UnitDataIndication(null, msg, msg.getPriority());
 
         transactionManager.createInboundTransaction(indicationUnit);
-
+        
+        
         for (final ChannelListener l : this.channelListeners) {
             if (l.getEID().equals(msg.getDestinationEID())) {
                 System.out.println(
                         "do a onIndication at " + l.getEID().toString());
-                l.onIndication(indicationUnit, ctx);
+                l.onIndication(indicationUnit, ctx.channel().remoteAddress());
             }
         }
     }

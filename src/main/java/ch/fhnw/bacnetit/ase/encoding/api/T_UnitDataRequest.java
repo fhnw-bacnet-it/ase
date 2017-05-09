@@ -1,4 +1,4 @@
-package ch.fhnw.bacnetit.ase.encoding;
+package ch.fhnw.bacnetit.ase.encoding.api;
 
 import java.net.URI;
 

@@ -11,7 +11,7 @@ import com.google.common.base.Preconditions;
 import ch.fhnw.bacnetit.ase.encoding.TransportError;
 import ch.fhnw.bacnetit.ase.encoding.exception.StackCommunicationException;
 import ch.fhnw.bacnetit.ase.network.transport.ConnectionClient;
-import ch.fhnw.bacnetit.ase.network.transport.ConnectionFactory;
+import ch.fhnw.bacnetit.ase.network.transport.api.ConnectionFactory;
 import ch.fhnw.bacnetit.ase.network.transport.util.ByteBufLogger;
 import ch.fhnw.bacnetit.ase.network.transport.util.MessageLogger;
 import ch.fhnw.bacnetit.ase.network.transport.util.PipelineLogger;

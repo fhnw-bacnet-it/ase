@@ -1,8 +1,8 @@
-package ch.fhnw.bacnetit.ase.application;
+package ch.fhnw.bacnetit.ase.application.api;
 
 import java.net.URI;
 
-import ch.fhnw.bacnetit.ase.encoding.BACnetEID;
+import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
 
 public interface BACnetEntityListener {
 

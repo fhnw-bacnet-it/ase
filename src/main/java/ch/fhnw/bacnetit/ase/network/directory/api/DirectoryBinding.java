@@ -1,9 +1,9 @@
-package ch.fhnw.bacnetit.ase.network.directory;
+package ch.fhnw.bacnetit.ase.network.directory.api;
 
 import java.net.URI;
 import java.util.List;
 
-import ch.fhnw.bacnetit.ase.encoding.BACnetEID;
+import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
 
 public interface DirectoryBinding {
     public List<BACnetEID> findBDS();

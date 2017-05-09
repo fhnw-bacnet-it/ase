@@ -1,4 +1,4 @@
-package ch.fhnw.bacnetit.ase.application.configuration;
+package ch.fhnw.bacnetit.ase.application.configuration.api;
 
 import java.io.Serializable;
 

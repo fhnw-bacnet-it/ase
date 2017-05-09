@@ -1,10 +1,10 @@
 
-package ch.fhnw.bacnetit.ase.application.transaction;
+package ch.fhnw.bacnetit.ase.application.transaction.api;
 
 import java.util.List;
 
-import ch.fhnw.bacnetit.ase.application.BACnetEntityListener;
-import ch.fhnw.bacnetit.ase.network.transport.ConnectionFactory;
+import ch.fhnw.bacnetit.ase.application.api.BACnetEntityListener;
+import ch.fhnw.bacnetit.ase.network.transport.api.ConnectionFactory;
 
 public interface ChannelConfiguration {
 

@@ -1,4 +1,4 @@
-package ch.fhnw.bacnetit.ase.application;
+package ch.fhnw.bacnetit.ase.application.api;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.X509KeyManager;
 
-import ch.fhnw.bacnetit.ase.application.configuration.KeystoreConfig;
+import ch.fhnw.bacnetit.ase.application.configuration.api.KeystoreConfig;
 
 /**
  * Each BACnetDevice instance has one NetworkPortObject. The NetworkProtObject

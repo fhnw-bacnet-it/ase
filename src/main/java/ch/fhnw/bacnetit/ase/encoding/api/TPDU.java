@@ -1,6 +1,14 @@
-package ch.fhnw.bacnetit.ase.encoding;
+package ch.fhnw.bacnetit.ase.encoding.api;
 
 import java.util.Arrays;
+
+import ch.fhnw.bacnetit.ase.encoding.ITBBase;
+import ch.fhnw.bacnetit.ase.encoding.NetworkPriority;
+import ch.fhnw.bacnetit.ase.encoding.SecurityParameters;
+import ch.fhnw.bacnetit.ase.encoding.UnsignedInteger16;
+import ch.fhnw.bacnetit.ase.encoding.UnsignedInteger31;
+import ch.fhnw.bacnetit.ase.encoding.UnsignedInteger8;
+import ch.fhnw.bacnetit.ase.encoding._ByteQueue;
 
 public class TPDU extends ITBBase {
     private final int REVISION = 2;
@@ -53,7 +61,6 @@ public class TPDU extends ITBBase {
             final BACnetEID destinationEID, final UnsignedInteger8 invokeId,
             final UnsignedInteger8 forwards, final SecurityParameters sp,
             final byte[] body) {
-        // this.bacnetTransportBindingAPDUType = typ;
         this.priority = priority;
         this.sourceEID = sourceEID;
         this.destinationEID = destinationEID;

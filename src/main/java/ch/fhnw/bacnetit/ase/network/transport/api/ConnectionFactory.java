@@ -1,4 +1,4 @@
-package ch.fhnw.bacnetit.ase.network.transport;
+package ch.fhnw.bacnetit.ase.network.transport.api;
 
 import java.net.InetSocketAddress;
 import java.net.URI;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import ch.fhnw.bacnetit.ase.network.transport.ConnectionClient;
 import io.netty.util.internal.logging.InternalLogger;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 

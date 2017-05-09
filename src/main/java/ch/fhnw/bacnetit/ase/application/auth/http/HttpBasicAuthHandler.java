@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-import ch.fhnw.bacnetit.ase.application.configuration.HttpAuthConfig;
+import ch.fhnw.bacnetit.ase.application.configuration.api.HttpAuthConfig;
 import ch.fhnw.bacnetit.ase.application.transaction.ChannelEvent;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
