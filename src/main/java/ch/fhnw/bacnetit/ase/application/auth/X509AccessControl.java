@@ -97,7 +97,7 @@ public class X509AccessControl implements X509TrustManager {
 
             this.x509.checkServerTrusted(chain, authType);
         } catch (final Exception e) {
-            System.out.println("Fail in checkServerTrusted: ");
+           
             for (final StackTraceElement ste : e.getStackTrace()) {
                 System.err.println(ste);
             }

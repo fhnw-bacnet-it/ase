@@ -127,10 +127,10 @@ public class ControlMessage extends ITBBase {
         final ControlMessage cm = new ControlMessage(ControlMessage.ADDREMOTE,
                 baclist, grouplist);
         cm.write(bq);
-        System.out.println(bq.toString());
+      
 
         final ControlMessage cm2 = new ControlMessage(bq);
-        System.out.println(cm2);
+
     }
 
 }

@@ -263,8 +263,7 @@ public class ASEChannel extends ChannelDuplexHandler
     }
 
     private void onIndication(final TPDU msg, final ChannelHandlerContext ctx) {
-        System.out.println(msg.getInvokeId());
-
+       
         T_UnitDataIndication indicationUnit = null;
         indicationUnit = new T_UnitDataIndication(null, msg, msg.getPriority());
 
@@ -273,8 +272,7 @@ public class ASEChannel extends ChannelDuplexHandler
         
         for (final ChannelListener l : this.channelListeners) {
             if (l.getEID().equals(msg.getDestinationEID())) {
-                System.out.println(
-                        "do a onIndication at " + l.getEID().toString());
+              
                 l.onIndication(indicationUnit, ctx.channel().remoteAddress());
             }
         }

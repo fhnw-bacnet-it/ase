@@ -94,8 +94,7 @@ public class OutgoingConnectionHandler {
     }
 
     public void connect(final URI uri) throws StackCommunicationException {
-        System.out.println("make connection to " + uri);
-
+        
         client = findConnectionClient(uri);
 
         if (client == null) {
