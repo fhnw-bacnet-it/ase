@@ -5,13 +5,13 @@ apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 
 def apiVersion = '0.9.0'
-def versionTag = 'SNAPSHOT'
+def versionTag = '-SNAPSHOT'
 
 if (hasProperty('isRelease')) {
-    versionTag = 'RELEASE'
+    versionTag = ''
 }
 
-version = "${apiVersion}-${versionTag}"
+version = "${apiVersion}${versionTag}"
 
 jar {
     baseName = 'bacnet-it-ase'
@@ -21,8 +21,9 @@ jar {
     }
 }
 
+// In this section you declare where to find the dependencies of your project
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
