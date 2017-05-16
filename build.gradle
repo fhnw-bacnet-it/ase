@@ -4,8 +4,14 @@ apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 
+def apiVersion = '0.9.0'
+def versionTag = '-SNAPSHOT'
 
-version = '0.1.0-SNAPSHOT'
+if (hasProperty('isRelease')) {
+    versionTag = ''
+}
+
+version = "${apiVersion}${versionTag}"
 
 jar {
     baseName = 'bacnet-it-ase'
@@ -15,20 +21,16 @@ jar {
     }
 }
 
+// In this section you declare where to find the dependencies of your project
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    compile 'org.mockito:mockito-core:1.10.19'
     compile 'io.netty:netty-all:4.1.2.Final'
     compile 'com.google.guava:guava:18.0'
-    compile 'org.apache.commons:commons-collections4:4.0'
-    compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'commons-configuration:commons-configuration:1.10'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.0.2'
-    testCompile 'ch.qos.logback:logback-classic:1.1.2'
-    testCompile 'junit:junit:4.12'
 }
 
 def getDate() {
