@@ -94,7 +94,7 @@ public class OutgoingConnectionHandler {
     }
 
     public void connect(final URI uri) throws StackCommunicationException {
-        
+
         client = findConnectionClient(uri);
 
         if (client == null) {

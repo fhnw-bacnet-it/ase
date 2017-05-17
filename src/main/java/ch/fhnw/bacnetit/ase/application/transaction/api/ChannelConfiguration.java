@@ -13,7 +13,7 @@ public interface ChannelConfiguration {
     public void registerChannelListener(ChannelListener msgListener);
 
     public void initializeAndStart(ConnectionFactory connectionFactory);
-    
+
     public List<ChannelListener> getChannelListeners();
 
     public void shutdown();

@@ -32,8 +32,8 @@ import io.netty.util.internal.logging.InternalLogger;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 
 @Sharable
-public class ASEChannel extends ChannelDuplexHandler
-        implements EndPointHandler, ch.fhnw.bacnetit.ase.application.transaction.api.Channel{
+public class ASEChannel extends ChannelDuplexHandler implements EndPointHandler,
+        ch.fhnw.bacnetit.ase.application.transaction.api.Channel {
     private static final InternalLogger LOG = InternalLoggerFactory
             .getInstance(ASEChannel.class);
     private OutgoingConnectionHandler outgoingConnectionHandler;
@@ -42,7 +42,6 @@ public class ASEChannel extends ChannelDuplexHandler
     private final List<ChannelListener> channelListeners = new ArrayList<ChannelListener>();
     private BACnetEntityListener entityListener = null;
     private boolean isInitialized = false;
-
 
     @Override
     public void setEntityListener(final BACnetEntityListener _entityListener) {
@@ -53,7 +52,7 @@ public class ASEChannel extends ChannelDuplexHandler
         this.entityListener = _entityListener;
 
     }
-    
+
     @Override
     public List<ChannelListener> getChannelListeners() {
         return this.channelListeners;
@@ -87,7 +86,8 @@ public class ASEChannel extends ChannelDuplexHandler
                             .toString().split("/");
 
                     // control message protocol is always websocket
-                    final URI remoteUri = new URI("ws://" + uri[uri.length-1]);
+                    final URI remoteUri = new URI(
+                            "ws://" + uri[uri.length - 1]);
                     if (this.entityListener == null) {
                         LOG.error("The BACnetEntityListener isn't set");
                         return;
@@ -206,9 +206,8 @@ public class ASEChannel extends ChannelDuplexHandler
         if (msg instanceof TPDU) {
 
             final TPDU tpdu = (TPDU) msg;
-      
+
             // TODO, next line is stop and fail
-           
 
             this.onIndication(tpdu, ctx);
 
@@ -263,16 +262,15 @@ public class ASEChannel extends ChannelDuplexHandler
     }
 
     private void onIndication(final TPDU msg, final ChannelHandlerContext ctx) {
-       
+
         T_UnitDataIndication indicationUnit = null;
         indicationUnit = new T_UnitDataIndication(null, msg, msg.getPriority());
 
         transactionManager.createInboundTransaction(indicationUnit);
-        
-        
+
         for (final ChannelListener l : this.channelListeners) {
             if (l.getEID().equals(msg.getDestinationEID())) {
-              
+
                 l.onIndication(indicationUnit, ctx.channel().remoteAddress());
             }
         }

@@ -25,7 +25,6 @@ public class PipelineLogger extends SimpleChannelInboundHandler<Object> {
         });
         output.append("//////////////////////////////");
         // System.out.println(output.toString());
-        
 
         final ByteBuf in = (ByteBuf) msg;
         ctx.fireChannelRead(in.retain());

@@ -69,7 +69,7 @@ public class DirectoryService {
      * DirectoryBindingFactory.createDirectoryBinding(
      * DirectoryBindingType.valueOf(dsConfig.directoryBindingType),
      * dsConfig.dnsIp, dsConfig);
-     * 
+     *
      * LOG.debug("DNS " + dsConfig.dnsIp + " set"); }
      */
 
