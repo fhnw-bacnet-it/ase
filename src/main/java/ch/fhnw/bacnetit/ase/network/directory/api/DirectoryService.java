@@ -12,12 +12,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
-
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
-
 import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
 import io.netty.util.internal.logging.InternalLogger;
 import io.netty.util.internal.logging.InternalLoggerFactory;
@@ -55,7 +53,7 @@ public class DirectoryService {
     }
 
     public synchronized void setDNSBinding(final DirectoryBinding dnsBinding) {
-        if (dnsBinding != null) {
+        if (this.dnsBinding != null) {
             return;
         }
         this.dnsBinding = dnsBinding;
@@ -144,7 +142,6 @@ public class DirectoryService {
             dnsBinding.registerObject(instance, isInstanceObjectName, txtvers,
                     bacnetEid, oid_oname, ttl, quality);
         }
-
     }
 
     public void saveCache() {

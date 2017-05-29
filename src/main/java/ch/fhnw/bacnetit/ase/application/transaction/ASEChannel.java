@@ -41,7 +41,7 @@ public class ASEChannel extends ChannelDuplexHandler implements EndPointHandler,
     private final TransactionManager transactionManager = new TransactionManager();
     private final List<ChannelListener> channelListeners = new ArrayList<ChannelListener>();
     private BACnetEntityListener entityListener = null;
-    private boolean isInitialized = false;
+    // private boolean isInitialized = false;
 
     @Override
     public void setEntityListener(final BACnetEntityListener _entityListener) {
@@ -245,7 +245,7 @@ public class ASEChannel extends ChannelDuplexHandler implements EndPointHandler,
     public synchronized void doRequest(
             final T_UnitDataRequest t_unitDataRequest) {
 
-        // Pass Outgoing request to the Transaction Manager
+        // Pass outgoing request to the Transaction Manager, receive an invokeId from transaction manager
         t_unitDataRequest.getData().setInvokeId(transactionManager
                 .createOutboundTransaction(t_unitDataRequest));
 
@@ -335,7 +335,7 @@ public class ASEChannel extends ChannelDuplexHandler implements EndPointHandler,
         incomingConnectionHandler.initialize(this);
         // incomingConnectionHandler.start();
 
-        isInitialized = true;
+        // isInitialized = true;
     }
 
     @Override
