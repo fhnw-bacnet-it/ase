@@ -245,7 +245,8 @@ public class ASEChannel extends ChannelDuplexHandler implements EndPointHandler,
     public synchronized void doRequest(
             final T_UnitDataRequest t_unitDataRequest) {
 
-        // Pass outgoing request to the Transaction Manager, receive an invokeId from transaction manager
+        // Pass outgoing request to the Transaction Manager, receive an invokeId
+        // from transaction manager
         t_unitDataRequest.getData().setInvokeId(transactionManager
                 .createOutboundTransaction(t_unitDataRequest));
 

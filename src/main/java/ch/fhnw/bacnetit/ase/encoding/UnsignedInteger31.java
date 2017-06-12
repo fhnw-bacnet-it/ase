@@ -8,13 +8,13 @@ public class UnsignedInteger31 extends PrimitiveSerializer {
     private int value;
 
     public UnsignedInteger31(final int _value) {
-        if (value < 0) {
+        if (_value < 0) {
             throw new IllegalArgumentException(
-                    "Value cannot be less than zero");
+                    "Value cannot be smaller than zero");
         }
-        if (value > 0x7FFFFFFF) { // max signed int: 2147483647
+        if (_value > 0x7FFFFFFF) { // max signed int: 2147483647
             throw new IllegalArgumentException(
-                    "Value cannot be more than zero");
+                    "Value cannot be bigger than 0x7FFFFFFF");
         }
         value = _value;
     }
