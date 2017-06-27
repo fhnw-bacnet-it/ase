@@ -6,6 +6,6 @@ package ch.fhnw.bacnetit.ase.network.transport;
  *
  * @author juerg.luthiger@fhnw.ch
  */
-public interface StatefulConnectionClient extends ConnectionClient {
+public interface _StatefulConnectionClient extends ConnectionClient {
 
 }

@@ -1,4 +1,4 @@
-package ch.fhnw.bacnetit.ase.application.transaction;
+package ch.fhnw.bacnetit.ase.application.service;
 
 import java.net.InetSocketAddress;
 import java.net.URI;
@@ -8,9 +8,8 @@ import java.util.List;
 
 import ch.fhnw.bacnetit.ase.application.ExceptionManager;
 import ch.fhnw.bacnetit.ase.application.api.BACnetEntityListener;
-import ch.fhnw.bacnetit.ase.application.service.EndPointHandler;
-import ch.fhnw.bacnetit.ase.application.service.IncomingConnectionHandler;
-import ch.fhnw.bacnetit.ase.application.service.OutgoingConnectionHandler;
+import ch.fhnw.bacnetit.ase.application.transaction.ChannelEvent;
+import ch.fhnw.bacnetit.ase.application.transaction.TransactionManager;
 import ch.fhnw.bacnetit.ase.application.transaction.api.ChannelListener;
 import ch.fhnw.bacnetit.ase.encoding.ControlMessage;
 import ch.fhnw.bacnetit.ase.encoding.ControlMessageInitEvent;
@@ -33,7 +32,7 @@ import io.netty.util.internal.logging.InternalLoggerFactory;
 
 @Sharable
 public class ASEChannel extends ChannelDuplexHandler implements EndPointHandler,
-        ch.fhnw.bacnetit.ase.application.transaction.api.Channel {
+        ch.fhnw.bacnetit.ase.application.service.Channel {
     private static final InternalLogger LOG = InternalLoggerFactory
             .getInstance(ASEChannel.class);
     private OutgoingConnectionHandler outgoingConnectionHandler;

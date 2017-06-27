@@ -1,6 +1,6 @@
 package ch.fhnw.bacnetit.ase.application;
 
-import ch.fhnw.bacnetit.ase.application.transaction.ASEChannel;
+import ch.fhnw.bacnetit.ase.application.service.ASEChannel;
 import ch.fhnw.bacnetit.ase.application.transaction.Transaction;
 import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
 import ch.fhnw.bacnetit.ase.encoding.exception.TransportErrorException;
