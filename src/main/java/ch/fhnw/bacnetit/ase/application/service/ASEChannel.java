@@ -32,7 +32,7 @@ import io.netty.util.internal.logging.InternalLoggerFactory;
 
 @Sharable
 public class ASEChannel extends ChannelDuplexHandler implements EndPointHandler,
-        ch.fhnw.bacnetit.ase.application.service.Channel {
+        ch.fhnw.bacnetit.ase.application.transaction.api.Channel {
     private static final InternalLogger LOG = InternalLoggerFactory
             .getInstance(ASEChannel.class);
     private OutgoingConnectionHandler outgoingConnectionHandler;
