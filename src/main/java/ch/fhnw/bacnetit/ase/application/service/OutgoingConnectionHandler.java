@@ -43,7 +43,8 @@ public class OutgoingConnectionHandler {
     private final ConnectionFactory connectionFactory;
 
     private final Map<InetSocketAddress, ConnectionClientContext> connectionCache = new ConcurrentHashMap<>();
-    // TODO check search by host not port
+    
+    // Set open connection by default null
     protected ConnectionClient client = null;
 
     public OutgoingConnectionHandler(
