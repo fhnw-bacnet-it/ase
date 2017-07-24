@@ -5,6 +5,7 @@ import ch.fhnw.bacnetit.ase.application.transaction.Transaction;
 import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
 import ch.fhnw.bacnetit.ase.encoding.exception.TransportErrorException;
 
+
 public class ExceptionManager {
 
     public void manageException(final Throwable cause, final BACnetEID source,

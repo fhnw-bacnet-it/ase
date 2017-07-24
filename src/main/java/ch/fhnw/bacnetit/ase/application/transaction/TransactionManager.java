@@ -13,8 +13,7 @@ import ch.fhnw.bacnetit.ase.encoding.UnsignedInteger8;
 import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
 import ch.fhnw.bacnetit.ase.encoding.api.T_UnitDataIndication;
 import ch.fhnw.bacnetit.ase.encoding.api.T_UnitDataRequest;
-import io.netty.util.internal.logging.InternalLogger;
-import io.netty.util.internal.logging.InternalLoggerFactory;
+
 
 /**
  * Maintains incoming and outgoing communication of a BACnet/IT stack.
@@ -34,8 +33,8 @@ public class TransactionManager {
 
     private final List<TransactionManagerListener> listeners = new ArrayList<TransactionManagerListener>();
 
-    private static final InternalLogger LOG = InternalLoggerFactory
-            .getInstance(TransactionManager.class);
+//    private static final InternalLogger LOG = InternalLoggerFactory
+//            .getInstance(TransactionManager.class);
 
     // Add a Transaction Manager Listener, e.g. the Logger nodejs application
     public void addListener(final TransactionManagerListener l) {
@@ -78,7 +77,7 @@ public class TransactionManager {
                             ? TransactionState.REQUESTED_WAITING
                             : TransactionState.REQUESTED_DONE);
             this.transactions.put(key, t);
-            LOG.debug("Created outbound transaction " + key.getInvokeId());
+//            LOG.debug("Created outbound transaction " + key.getInvokeId());
             this.listeners.forEach(l -> {
                 try {
                     l.onAdd(key, t);

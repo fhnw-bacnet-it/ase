@@ -1,21 +1,19 @@
-
+/**
+ * 
+ */
 package ch.fhnw.bacnetit.ase.application.transaction.api;
 
-import java.util.List;
-
 import ch.fhnw.bacnetit.ase.application.api.BACnetEntityListener;
-import ch.fhnw.bacnetit.ase.network.transport.api.ConnectionFactory;
+import ch.fhnw.bacnetit.ase.application.service.ASEService;
+import ch.fhnw.bacnetit.transportbinding.ws.ConnectionFactory;
 
+/**
+ * @author IMVS, FHNW
+ *
+ */
 public interface ChannelConfiguration {
-
-    public void setEntityListener(BACnetEntityListener entityListener);
-
+    public void addBinding(ASEService aseService);
     public void registerChannelListener(ChannelListener msgListener);
-
-    public void initializeAndStart(ConnectionFactory connectionFactory);
-
-    public List<ChannelListener> getChannelListeners();
-
-    public void shutdown();
+    public void setEntityListener(BACnetEntityListener entityListener);
 
 }

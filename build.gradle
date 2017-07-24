@@ -27,7 +27,6 @@ repositories {
 }
 
 dependencies {
-    compile 'io.netty:netty-all:4.1.2.Final'
     compile 'com.google.guava:guava:18.0'
     compile 'commons-configuration:commons-configuration:1.10'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.0.2'

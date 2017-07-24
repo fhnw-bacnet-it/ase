@@ -19,8 +19,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 
 import ch.fhnw.bacnetit.ase.encoding.api.BACnetEID;
-import io.netty.util.internal.logging.InternalLogger;
-import io.netty.util.internal.logging.InternalLoggerFactory;
+
 
 public class DirectoryService {
 
@@ -31,8 +30,8 @@ public class DirectoryService {
     private DirectoryBinding dnsBinding = null;
     private static DirectoryService instance = null;
 
-    private static final InternalLogger LOG = InternalLoggerFactory
-            .getInstance(DirectoryService.class);
+//    private static final InternalLogger LOG = InternalLoggerFactory
+//            .getInstance(DirectoryService.class);
 
     private DirectoryService() {
         this.cache = readCacheFile();
@@ -59,7 +58,7 @@ public class DirectoryService {
             return;
         }
         this.dnsBinding = dnsBinding;
-        LOG.debug("DNS", dnsBinding.toString());
+//        LOG.debug("DNS", dnsBinding.toString());
 
     }
 
@@ -85,8 +84,8 @@ public class DirectoryService {
                         final BACnetEID eid = new BACnetEID(
                                 Integer.parseInt(parser.getCurrentName()));
                         final URI uri = new URI(parser.nextTextValue());
-                        LOG.debug("Reading " + eid.getIdentifierAsString()
-                                + ": " + uri);
+//                        LOG.debug("Reading " + eid.getIdentifierAsString()
+//                                + ": " + uri);
                         readCache.put(eid, uri);
                     }
                 }
@@ -111,8 +110,8 @@ public class DirectoryService {
                     .createJsonGenerator(writer);
             generator.writeStartObject();
             for (final Entry<BACnetEID, URI> entry : cache.entrySet()) {
-                LOG.debug("Writing " + entry.getKey().getIdentifierAsString()
-                        + ": " + entry.getValue() + " to file");
+//                LOG.debug("Writing " + entry.getKey().getIdentifierAsString()
+//                        + ": " + entry.getValue() + " to file");
                 generator
                         .writeFieldName(entry.getKey().getIdentifierAsString());
                 generator.writeString(entry.getValue().toString());
@@ -161,16 +160,16 @@ public class DirectoryService {
 
     public synchronized BACnetEID getBds() {
         if (bds == null) {
-            LOG.debug("No BDS has been found in local cache");
+//            LOG.debug("No BDS has been found in local cache");
             if (dnsBinding != null) {
                 final List<BACnetEID> bdss = dnsBinding.findBDS();
 
                 if (!bdss.isEmpty()) {
                     bds = bdss.get(0);
-                    LOG.debug(
-                            "BDS found at EID " + bds.getIdentifierAsString());
+//                    LOG.debug(
+//                            "BDS found at EID " + bds.getIdentifierAsString());
                 } else {
-                    LOG.error("No BDS has been found in DNS.");
+//                    LOG.error("No BDS has been found in DNS.");
                 }
             }
         }
@@ -180,16 +179,16 @@ public class DirectoryService {
     public synchronized URI resolve(final BACnetEID eid)
             throws UnknownHostException {
         if (!cache.containsKey(eid) && dnsBinding != null) {
-            LOG.debug("URL for " + eid.getIdentifierAsString()
-                    + " not found in cache");
+//            LOG.debug("URL for " + eid.getIdentifierAsString()
+//                    + " not found in cache");
             final URI url = dnsBinding.resolve(eid);
             if (url == null) {
                 throw new UnknownHostException();
             }
             cache.putIfAbsent(eid, url);
         } else {
-            LOG.debug("URL for " + eid.getIdentifierAsString()
-                    + " found in cache");
+//            LOG.debug("URL for " + eid.getIdentifierAsString()
+//                    + " found in cache");
         }
         return cache.get(eid);
     }
