@@ -1,4 +1,4 @@
-package ch.fhnw.bacnetit.ase.application.api;
+package ch.fhnw.bacnetit.ase.application.service.api;
 
 import java.net.URI;
 

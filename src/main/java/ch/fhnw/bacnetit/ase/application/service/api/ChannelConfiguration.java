@@ -1,11 +1,10 @@
 /**
- * 
+ *
  */
-package ch.fhnw.bacnetit.ase.application.transaction.api;
+package ch.fhnw.bacnetit.ase.application.service.api;
 
-import ch.fhnw.bacnetit.ase.application.api.BACnetEntityListener;
-import ch.fhnw.bacnetit.ase.application.service.ASEService;
-import ch.fhnw.bacnetit.transportbinding.ws.ConnectionFactory;
+import ch.fhnw.bacnetit.ase.application.transaction.api.ChannelListener;
+import ch.fhnw.bacnetit.ase.transportbinding.service.api.ASEService;
 
 /**
  * @author IMVS, FHNW
@@ -13,7 +12,9 @@ import ch.fhnw.bacnetit.transportbinding.ws.ConnectionFactory;
  */
 public interface ChannelConfiguration {
     public void addBinding(ASEService aseService);
+
     public void registerChannelListener(ChannelListener msgListener);
+
     public void setEntityListener(BACnetEntityListener entityListener);
 
 }

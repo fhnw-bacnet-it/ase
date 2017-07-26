@@ -25,12 +25,11 @@ public class T_UnitDataRequest {
     private final Object context;
 
     public T_UnitDataRequest(final URI _destinationAddress, final TPDU _data,
-            final int _networkPriority, final boolean _dataExpectingReply,
-            final Object _context) {
+            final int _networkPriority, final Object _context) {
         this.destinationAddress = _destinationAddress;
         this.data = _data;
         this.networkPriority = _networkPriority;
-        this.dataExpectingReply = _dataExpectingReply;
+        this.dataExpectingReply = this.data.isConfirmedRequest();
         this.context = _context;
     }
 
