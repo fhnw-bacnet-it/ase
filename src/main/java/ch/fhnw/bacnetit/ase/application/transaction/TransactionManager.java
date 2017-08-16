@@ -139,6 +139,11 @@ public class TransactionManager {
 
     public void createInboundTransaction(
             final T_UnitDataIndication t_unitDataIndication) {
+        
+        if (t_unitDataIndication.getData().getInvokeId() == null){
+            System.err.println("t_unitDataIndication has no invoke Id");
+            return;
+        }
 
         final TransactionKey key = new TransactionKey(
                 t_unitDataIndication.getData().getSourceEID(),

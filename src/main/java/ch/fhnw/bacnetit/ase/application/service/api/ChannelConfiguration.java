@@ -11,7 +11,7 @@ import ch.fhnw.bacnetit.ase.transportbinding.service.api.ASEService;
  *
  */
 public interface ChannelConfiguration {
-    public void addBinding(ASEService aseService);
+    public void setASEService(ASEService aseService);
 
     public void registerChannelListener(ChannelListener msgListener);
 

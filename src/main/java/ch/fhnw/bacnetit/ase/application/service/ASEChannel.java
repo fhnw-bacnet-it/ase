@@ -29,13 +29,14 @@ public class ASEChannel
     // Interface to transport binding
     private final List<ASEService> aseServices;
     private final TransactionManager transactionManager;
-    private final List<ChannelListener> channelListeners = new ArrayList<ChannelListener>();
+    private final List<ChannelListener> channelListeners;
     private BACnetEntityListener entityListener = null;
 
     public ASEChannel(Object o) throws Exception {
         if (!(o instanceof ChannelFactory)){
             throw new Exception("Use ChannelFactory to get an instance of ASEChannel");
         }
+        channelListeners = new ArrayList<ChannelListener>();
         aseServices = new LinkedList<ASEService>();
         transactionManager = new TransactionManager();
     }
@@ -55,6 +56,11 @@ public class ASEChannel
         indicationUnit = new T_UnitDataIndication(null, msg, msg.getPriority());
 
         transactionManager.createInboundTransaction(indicationUnit);
+        
+        if(this.channelListeners.size() == 0){
+            System.err.println("No channel listener is registered");
+            return;
+        }
 
         for (final ChannelListener l : this.channelListeners) {
             if (l.getEID().equals(msg.getDestinationEID())) {
@@ -87,12 +93,13 @@ public class ASEChannel
      ***********************************************************************/
 
     @Override
-    public void addBinding(final ASEService aseService) {
+    public void setASEService(final ASEService aseService) {
+        // Are several aseService instances possible?
         this.aseServices.add(aseService);
         aseService.setTransportBindingService(this);
 
     }
-
+    
     // Register a device which use this instance as messaging
     @Override
     public void registerChannelListener(final ChannelListener msgListener) {
@@ -108,7 +115,6 @@ public class ASEChannel
             return;
         }
         this.entityListener = _entityListener;
-
     }
 
     /***********************************************************************
@@ -116,12 +122,10 @@ public class ASEChannel
      ***********************************************************************/
     @Override
     public void doRequest(final T_UnitDataRequest t_unitDataRequest) {
-
         // Pass outgoing request to the Transaction Manager, receive an invokeId
         // from transaction manager
         t_unitDataRequest.getData().setInvokeId(transactionManager
                 .createOutboundTransaction(t_unitDataRequest));
-
         aseServices.get(0).doRequest(t_unitDataRequest);
 
     }
@@ -129,12 +133,6 @@ public class ASEChannel
     @Override
     public void doCancel(final BACnetEID destination, final BACnetEID source) {
         aseServices.get(0).doCancel(destination, source);
-
     }
-
-
-  
-    
-   
 
 }
