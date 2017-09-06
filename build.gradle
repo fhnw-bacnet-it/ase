@@ -30,6 +30,7 @@ dependencies {
     compile 'com.google.guava:guava:18.0'
     compile 'commons-configuration:commons-configuration:1.10'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.0.2'
+    testCompile 'junit:junit:4.12'
 }
 
 def getDate() {
@@ -41,7 +42,7 @@ def getDate() {
 build.dependsOn jacocoTestReport
 
 test {
-    ignoreFailures = true
+    ignoreFailures = false
     reports {
         junitXml.enabled = true
         html.enabled = true

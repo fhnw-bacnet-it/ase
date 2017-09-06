@@ -8,6 +8,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 import ch.fhnw.bacnetit.ase.application.service.api.BACnetEntityListener;
 import ch.fhnw.bacnetit.ase.application.service.api.ChannelFactory;
 import ch.fhnw.bacnetit.ase.application.transaction.TransactionManager;
@@ -32,9 +33,10 @@ public class ASEChannel
     private final List<ChannelListener> channelListeners;
     private BACnetEntityListener entityListener = null;
 
-    public ASEChannel(Object o) throws Exception {
-        if (!(o instanceof ChannelFactory)){
-            throw new Exception("Use ChannelFactory to get an instance of ASEChannel");
+    public ASEChannel(final Object o) throws Exception {
+        if (!(o instanceof ChannelFactory)) {
+            throw new Exception(
+                    "Use ChannelFactory to get an instance of ASEChannel");
         }
         channelListeners = new ArrayList<ChannelListener>();
         aseServices = new LinkedList<ASEService>();
@@ -56,8 +58,8 @@ public class ASEChannel
         indicationUnit = new T_UnitDataIndication(null, msg, msg.getPriority());
 
         transactionManager.createInboundTransaction(indicationUnit);
-        
-        if(this.channelListeners.size() == 0){
+
+        if (this.channelListeners.size() == 0) {
             System.err.println("No channel listener is registered");
             return;
         }
@@ -69,23 +71,22 @@ public class ASEChannel
         }
 
     }
-    
+
     @Override
-    public List<UnsignedInteger31> getChannelListeners(){
+    public List<UnsignedInteger31> getChannelListeners() {
         final List<UnsignedInteger31> bacneteids = new LinkedList<UnsignedInteger31>();
-        
+
         for (final ChannelListener cl : this.channelListeners) {
             bacneteids.add(new UnsignedInteger31(cl.getEID().getIdentifier()));
         }
         return bacneteids;
-        
-        
+
     }
-    
+
     @Override
-    public void onRemoteAdded(BACnetEID eid, URI uri) {
+    public void onRemoteAdded(final BACnetEID eid, final URI uri) {
         this.entityListener.onRemoteAdded(eid, uri);
-        
+
     }
 
     /***********************************************************************
@@ -99,7 +100,7 @@ public class ASEChannel
         aseService.setTransportBindingService(this);
 
     }
-    
+
     // Register a device which use this instance as messaging
     @Override
     public void registerChannelListener(final ChannelListener msgListener) {

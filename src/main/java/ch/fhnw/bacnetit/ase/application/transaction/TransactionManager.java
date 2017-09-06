@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,12 +29,13 @@ public class TransactionManager {
     // Pool of maintained transactions
     private final Map<TransactionKey, Transaction> transactions = new ConcurrentHashMap<TransactionKey, Transaction>();
 
-    // private final List<TransactionManagerListener> listeners = new ArrayList<TransactionManagerListener>();
+    // private final List<TransactionManagerListener> listeners = new
+    // ArrayList<TransactionManagerListener>();
 
     // Add a Transaction Manager Listener, e.g. the Logger nodejs application
-//    public void addListener(final TransactionManagerListener l) {
-//        listeners.add(l);
-//    }
+    // public void addListener(final TransactionManagerListener l) {
+    // listeners.add(l);
+    // }
 
     public Transaction findTransaction(final TransactionKey key) {
         if (transactions.containsKey(key)) {
@@ -45,15 +45,15 @@ public class TransactionManager {
         }
     }
 
-//    public boolean changeTransactionState(final TransactionKey key,
-//            final TransactionState state) {
-//        final Transaction t = this.findTransaction(key);
-//        if (t == null) {
-//            return false;
-//        }
-//        t.setNewState(state);
-//        return true;
-//    }
+    // public boolean changeTransactionState(final TransactionKey key,
+    // final TransactionState state) {
+    // final Transaction t = this.findTransaction(key);
+    // if (t == null) {
+    // return false;
+    // }
+    // t.setNewState(state);
+    // return true;
+    // }
 
     public UnsignedInteger8 createOutboundTransaction(
             final T_UnitDataRequest t_unitDataRequest) {
@@ -74,14 +74,14 @@ public class TransactionManager {
                             : TransactionState.REQUESTED_DONE);
             this.transactions.put(key, t);
             // LOG.debug("Created outbound transaction " + key.getInvokeId());
-//            this.listeners.forEach(l -> {
-//                try {
-//                    l.onAdd(key, t);
-//                } catch (final Exception e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            });
+            // this.listeners.forEach(l -> {
+            // try {
+            // l.onAdd(key, t);
+            // } catch (final Exception e) {
+            // // TODO Auto-generated catch block
+            // e.printStackTrace();
+            // }
+            // });
             return key.getInvokeId();
         }
         // T_UnitDataRequest does contain an invokeId
@@ -91,7 +91,7 @@ public class TransactionManager {
                     t_unitDataRequest.getData().getDestinationEID(),
                     t_unitDataRequest.getData().getSourceEID(),
                     t_unitDataRequest.getData().getInvokeId(),
-                    TransactionKey.DIRECTION_IN);            
+                    TransactionKey.DIRECTION_IN);
             final Transaction transactionToAnswer = this
                     .findTransaction(keyIfAnswer);
 
@@ -100,38 +100,40 @@ public class TransactionManager {
                 // transaction is a confirm
                 transactionToAnswer
                         .setNewState(TransactionState.INDICATED_DONE);
-//                this.listeners.forEach(l -> {
-//                    try {
-//                        l.onChange(keyIfAnswer, transactionToAnswer,
-//                                TransactionState.INDICATED_WAITING);
-//                    } catch (final Exception e) {
-//                        // TODO Auto-generated catch block
-//                        e.printStackTrace();
-//                    }
-//                });
+                // this.listeners.forEach(l -> {
+                // try {
+                // l.onChange(keyIfAnswer, transactionToAnswer,
+                // TransactionState.INDICATED_WAITING);
+                // } catch (final Exception e) {
+                // // TODO Auto-generated catch block
+                // e.printStackTrace();
+                // }
+                // });
                 return t_unitDataRequest.getData().getInvokeId();
             } else {
-                TransactionKey key = new TransactionKey(
+                final TransactionKey key = new TransactionKey(
                         t_unitDataRequest.getData().getSourceEID(),
                         t_unitDataRequest.getData().getDestinationEID(),
                         t_unitDataRequest.getData().getInvokeId(),
                         TransactionKey.DIRECTION_OUT);
-                this.transactions.put(key, new Transaction(
-                        t_unitDataRequest.getDataExpectingReply()?TransactionState.REQUESTED_WAITING:TransactionState.REQUESTED_DONE
-                        ));
+                this.transactions.put(key,
+                        new Transaction(
+                                t_unitDataRequest.getDataExpectingReply()
+                                        ? TransactionState.REQUESTED_WAITING
+                                        : TransactionState.REQUESTED_DONE));
                 // transaction is new. most likely a resend after a timeout
-//                this.listeners.forEach(l -> {
-//                    try {
-//                        l.onAdd(keyIfAnswer, new Transaction(
-//                                (t_unitDataRequest.getDataExpectingReply())
-//                                        ? TransactionState.REQUESTED_WAITING
-//                                        : TransactionState.REQUESTED_DONE));
-//                        // TODO: this behaviour is basically the same as if the
-//                        // transaction had no invoke id -> validate this
-//                    } catch (final Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                });
+                // this.listeners.forEach(l -> {
+                // try {
+                // l.onAdd(keyIfAnswer, new Transaction(
+                // (t_unitDataRequest.getDataExpectingReply())
+                // ? TransactionState.REQUESTED_WAITING
+                // : TransactionState.REQUESTED_DONE));
+                // // TODO: this behaviour is basically the same as if the
+                // // transaction had no invoke id -> validate this
+                // } catch (final Exception e) {
+                // e.printStackTrace();
+                // }
+                // });
                 return t_unitDataRequest.getData().getInvokeId();
             }
         }
@@ -139,8 +141,8 @@ public class TransactionManager {
 
     public void createInboundTransaction(
             final T_UnitDataIndication t_unitDataIndication) {
-        
-        if (t_unitDataIndication.getData().getInvokeId() == null){
+
+        if (t_unitDataIndication.getData().getInvokeId() == null) {
             System.err.println("t_unitDataIndication has no invoke Id");
             return;
         }
@@ -165,21 +167,21 @@ public class TransactionManager {
                                 ? existingTransaction : null;
         if (existingTransaction != null) {
             existingTransaction.setNewState(TransactionState.REQUESTED_DONE);
-//            for (final TransactionManagerListener l : this.listeners) {
-//                try {
-//                    l.onChange(changedKey, existingTransaction,
-//                            TransactionState.REQUESTED_WAITING);
-//                } catch (final Exception e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            }
+            // for (final TransactionManagerListener l : this.listeners) {
+            // try {
+            // l.onChange(changedKey, existingTransaction,
+            // TransactionState.REQUESTED_WAITING);
+            // } catch (final Exception e) {
+            // // TODO Auto-generated catch block
+            // e.printStackTrace();
+            // }
+            // }
         }
         // Create a new Transaction entry for incoming request
         // Distinguish between requests which demand for a response and request
         // which don't.
         else if (t_unitDataIndication.getDataExpectingReply()) {
-            
+
             final TransactionKey haveToResponseTransactionKey = new TransactionKey(
                     t_unitDataIndication.getData().getSourceEID(),
                     t_unitDataIndication.getData().getDestinationEID(),
@@ -188,14 +190,14 @@ public class TransactionManager {
             final Transaction t = new Transaction(
                     TransactionState.INDICATED_WAITING);
             this.transactions.put(haveToResponseTransactionKey, t);
-//            this.listeners.forEach(l -> {
-//                try {
-//                    l.onAdd(haveToResponseTransactionKey, t);
-//                } catch (final Exception e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            });
+            // this.listeners.forEach(l -> {
+            // try {
+            // l.onAdd(haveToResponseTransactionKey, t);
+            // } catch (final Exception e) {
+            // // TODO Auto-generated catch block
+            // e.printStackTrace();
+            // }
+            // });
         } else if (!t_unitDataIndication.getDataExpectingReply()) {
             final TransactionKey noResponseTransactionKey = new TransactionKey(
                     t_unitDataIndication.getData().getSourceEID(),
@@ -205,14 +207,14 @@ public class TransactionManager {
             final Transaction t = new Transaction(
                     TransactionState.INDICATED_DONE);
             this.transactions.put(noResponseTransactionKey, t);
-//            this.listeners.forEach(l -> {
-//                try {
-//                    l.onAdd(noResponseTransactionKey, t);
-//                } catch (final Exception e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            });
+            // this.listeners.forEach(l -> {
+            // try {
+            // l.onAdd(noResponseTransactionKey, t);
+            // } catch (final Exception e) {
+            // // TODO Auto-generated catch block
+            // e.printStackTrace();
+            // }
+            // });
         }
 
     }

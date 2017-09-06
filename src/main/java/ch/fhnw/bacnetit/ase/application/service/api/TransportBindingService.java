@@ -18,8 +18,8 @@ import ch.fhnw.bacnetit.ase.encoding.api.TPDU;
 public interface TransportBindingService {
     public void onIndication(final TPDU msg,
             final SocketAddress remoteSocketAddress);
-    
+
     public List<UnsignedInteger31> getChannelListeners();
-    
+
     public void onRemoteAdded(BACnetEID eid, URI uri);
 }
