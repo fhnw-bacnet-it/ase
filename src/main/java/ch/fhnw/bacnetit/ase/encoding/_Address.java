@@ -51,7 +51,7 @@ public class _Address extends ITBBase {
     /**
      * Convenience constructor for MS/TP addresses remote to this network.
      *
-     * @param network
+     * @param networkNumber
      * @param station
      */
     public _Address(final int networkNumber, final byte station) {
@@ -72,7 +72,7 @@ public class _Address extends ITBBase {
     /**
      * Convenience constructor for IP addresses remote to this network.
      *
-     * @param network
+     * @param networkNumber
      * @param ipAddress
      * @param port
      */

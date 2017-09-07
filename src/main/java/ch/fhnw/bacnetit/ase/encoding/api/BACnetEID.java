@@ -22,7 +22,7 @@ public class BACnetEID extends Serializer implements Comparable<BACnetEID> {
      *            ByteQueue to initialize a BACnetEID instance
      * @param contextId
      * @throws Exception
-     * @throws BACnetException
+     * @throws Exception
      */
     public BACnetEID(final _ByteQueue queue, final int contextId,
             final BACnetEIDOption option) throws Exception {

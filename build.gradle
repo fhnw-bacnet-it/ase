@@ -1,31 +1,26 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'jacoco'
 
-def apiVersion = '0.9.0'
-def versionTag = '-SNAPSHOT'
 
-if (hasProperty('isRelease')) {
-    versionTag = ''
-}
-
-version = "${apiVersion}${versionTag}"
-
+// configuration of the generated JAR package
 jar {
-    baseName = 'bacnet-it-ase'
     manifest {
         attributes("Implementation-Title": "BACnet/IT Application Service Element",
                    "Implementation-Version": version)
     }
 }
 
-// In this section you declare where to find the dependencies of your project
+// Maven repositories to look for dependencies
 repositories {
+    mavenLocal()
     jcenter()
 }
 
+// the project dependencies
 dependencies {
     compile 'com.google.guava:guava:18.0'
     compile 'commons-configuration:commons-configuration:1.10'
@@ -33,14 +28,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-def getDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyy-MM-dd--HH-mm')
-    return formattedDate
-}
-
+// dependencies of build task
 build.dependsOn jacocoTestReport
 
+// test tasks
 test {
     ignoreFailures = false
     reports {
@@ -79,16 +70,34 @@ tasks.withType(FindBugs) {
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.3'
+task sourcesJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.allSource
 }
 
-uploadArchives {
-    repositories {
-       flatDir {
-           dirs 'repos'
-       }
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+}
+
+// generate a Gradle wrapper
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.5'
+}
+
+// install into Maven repository
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'ch.fhnw.bacnet-it'
+            artifactId = project.name
+            version = project.version
+            from components.java
+
+            artifact sourcesJar {
+                classifier = 'sources'
+            }
+            artifact javadocJar {
+                classifier = 'javadoc'
+            }
+        }
     }
 }
-
-
